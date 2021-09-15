@@ -38,25 +38,35 @@
             </tr>
         </thead>
         <tbody>
-            <!-- YOUR CODE -->
+            <?php if (! empty($transactions)): ?>
+                <?php foreach($transactions as $transaction): ?>
+                    <?php $color = formatColor($transaction['amount']); ?>
+                    <tr>
+                        <td><?= formatDate($transaction['date']) ?></td>
+                        <td><?= $transaction['checkNumber'] ?></td>
+                        <td><?= $transaction['description'] ?></td>
+                        <td style="color: <?php echo $color; ?>; font-weight: 700;" ><?= formatDollarAmount( $transaction['amount']) ?></td>
+                    </tr>
+                <?php endforeach ?>
+            <?php endif ?>
         </tbody>
         <tfoot>
             <tr>
                 <th colspan="3">Total Income:</th>
                 <td>
-                    <!-- YOUR CODE -->
+                    <?= formatDollarAmount($totals['totalIncome'] ?? 0) ?>
                 </td>
             </tr>
             <tr>
                 <th colspan="3">Total Expense:</th>
                 <td>
-                    <!-- YOUR CODE -->
+                    <?= formatDollarAmount($totals['totalExpense'] ?? 0) ?>
                 </td>
             </tr>
             <tr>
                 <th colspan="3">Net Total:</th>
                 <td>
-                    <!-- YOUR CODE -->
+                    <?= formatDollarAmount($totals['netTotal'] ?? 0) ?>
                 </td>
             </tr>
         </tfoot>
